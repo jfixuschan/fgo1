@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<style type="text/css">
+		.enemy{
+			height: 280px;
+			width: 210px;
+			background-size: 100% 100%;		
+			transition: 1s;
+			position: relative;
+			margin-top: 475px;
+			
+		}
+		.enemy1{
+			height: 280px;
+			width: 210px;
+			background-size: 100% 100%;		
+			transition: 1s;
+			position: relative;
+			margin-top: 475px;
+			
+		}
+		.enemy2{
+			height: 280px;
+			width: 210px;
+			background-size: 100% 100%;		
+			transition: 1s;
+			position: relative;
+			margin-top: 475px;
+			
+		}
+		.player{
+			height: 280px;
+			width: 210px;
+			background-size: 100% 100%;
+			transition: 1s;
+			margin-top: 475px;
+			
+			position: relative;
+		}
+		.player1{
+			height: 280px;
+			width: 210px;
+			background-size: 100% 100%;
+			transition: 1s;
+			position: relative;
+			margin-top: 475px;
+			
+		}
+		.player2{
+			height: 280px;
+			width: 210px;
+			background-size: 100% 100%;
+			transition: 1s;
+			position: relative;
+			margin-top: 475px;
+			
+		}
+		.mstr{
+			height: 200px;
+			width: 150px;
+			left: 1000px;
+			top: 15px;
+			position: absolute;
+		}
+		.player_property{
+			position: absolute;
+			color: white;
+		}
+		
+	</style>
+</head>
+<body>
+
+
+	<div class="mom"  style="background-image: url('back/1.png'); background-size: 100% 100%">
+		<h1 class="enemy_name" style="position: absolute; left: 275px; top: 300px; color: white"></h1>
+		<h1 class="player_name" style="position: absolute; left: 1100px; top: 300px; color: white"></h1>
+		<h1 style="position: absolute; left: 600px; top: 50px; color: white">score: <span class="score">0</span></h1>
+		<img src="img/5.png" style="position: absolute; top: 25px; left: 800px; width: 175px">
+		<img src="img/12.png" class="mstr">
+		
+		<div class="row mx-auto">
+			<div class="enemy">
+				<h2 class="enemy_hp player_property" style="left: 10%;">0</h2>
+				<h2 class="enemy_damage player_property" style="left: 82%;">0</h2>
+			</div>
+			<div class="enemy1">
+				<h2 class="enemy1_hp player_property" style="left: 10%;">0</h2>
+				<h2 class="enemy1_damage player_property" style="left: 82%;">0</h2>
+			</div>
+			<div class="enemy2">
+				<h2 class="enemy2_hp player_property" style="left: 10%;">0</h2>
+				<h2 class="enemy2_damage player_property" style="left: 82%;">0</h2>
+			</div>
+			<div class="player" style="margin-left: 200px">
+				<h2 class="player_hp player_property" style="left: 82%;">0</h2>
+				<h2 class="player_damage player_property" style="left: 10%;">0</h2>
+			</div>
+			<div class="player1">
+				<h2 class="player1_hp player_property" style="left: 82%;">0</h2>
+				<h2 class="player1_damage player_property" style="left: 10%;">0</h2>
+			</div>
+			<div class="player2">
+				<h2 class="player2_hp player_property" style="left: 82%;">0</h2>
+				<h2 class="player2_damage player_property" style="left: 10%;">0</h2>
+			</div>
+		</div>
+
+	</div>
+	<button class="btn" style="position: absolute; left: 42%; top: 45%; display: none">
+		<a href="fgo2.html">Второй уровень</a>
+	</button>
+	
+<script type="text/javascript">
+	let btn = document.querySelector( ".btn")
+
+	let score = 0
+	let score_elem = document.querySelector( ".score")
+
+	let point = 3
+	let point_elem = document.querySelector( ".point")
+
+	let mom = document.querySelector( ".mom")
+
+	let enemy_name = document.querySelector(".enemy_name")
+	let player_name = document.querySelector(".player_name")
+
+	let enemy_img = document.querySelector( ".enemy")
+	let enemy1_img = document.querySelector( ".enemy1")
+	let enemy2_img = document.querySelector( ".enemy2")
+	let player_img = document.querySelector( ".player")
+	let player1_img = document.querySelector( ".player1")
+	let player2_img = document.querySelector( ".player2")
+
+	let enemy_hp = document.querySelector( ".enemy_hp")
+	let enemy1_hp = document.querySelector( ".enemy1_hp")
+	let enemy2_hp = document.querySelector( ".enemy2_hp")
+	let player_hp = document.querySelector( ".player_hp")
+	let player1_hp = document.querySelector( ".player1_hp")
+	let player2_hp = document.querySelector( ".player2_hp")
+
+	let enemy_dmg = document.querySelector( ".enemy_damage")
+	let enemy1_dmg = document.querySelector( ".enemy1_damage")
+	let enemy2_dmg = document.querySelector( ".enemy2_damage")
+	let player_dmg = document.querySelector( ".player_damage")
+	let player1_dmg = document.querySelector( ".player1_damage")
+	let player2_dmg = document.querySelector( ".player2_damage")
+
+	let images = ["url(img/2.png)","url(img/3.png)","url(img/4.png)","url(img/6.png)","url(img/7.png)","url(img/8.png)","url(img/11.png)"]
+	let getRandomImg = function(){
+		let rand = Math.random() * 7
+		let round = Math.round(rand)
+		return round
+	}
+	let enemyImg = ["url(img/1.png)","url(img/9.png)","url(img/13.png)","url(img/14.png)",,"url(img/15.png)","url(img/16.png)","url(img/17.png)",]
+	let getRandomImg1 = function(){
+		let rand = Math.random() * 5
+		let round = Math.round(rand)
+		return round
+	}
+	let getRandom = function(){
+		let rand = Math.random() * 20
+		let round = Math.round(rand)
+		return round
+	}
+	let enemy = {
+		dmg : getRandom(),
+		hp : getRandom(),
+		img : enemyImg[getRandomImg1()]
+	}
+	let enemy1 = {
+		dmg : getRandom(),
+		hp : getRandom(),
+		img : enemyImg[getRandomImg1()]
+	}
+	let enemy2 = {
+		dmg :  getRandom(),
+		hp : getRandom(),
+		img : enemyImg[getRandomImg1()]
+	}
+	let player = {
+		dmg : getRandom(),
+		hp : getRandom(),
+		img : images[getRandomImg()]
+	}
+	let player1 = {
+		dmg : getRandom(),
+		hp : getRandom(),
+		img : images[getRandomImg()]
+	}
+	let player2 = {
+		dmg : getRandom(),
+		hp : getRandom(),
+		img : images[getRandomImg()]
+	}
+	player_img.style.backgroundImage = player.img
+	player1_img.style.backgroundImage = player1.img
+	player2_img.style.backgroundImage = player2.img
+	enemy_img.style.backgroundImage = enemy.img
+	enemy1_img.style.backgroundImage = enemy1.img
+	enemy2_img.style.backgroundImage = enemy2.img
+
+	enemy_dmg.innerHTML = enemy.dmg
+	enemy1_dmg.innerHTML = enemy1.dmg
+	enemy2_dmg.innerHTML = enemy2.dmg
+	enemy_hp.innerHTML = enemy.hp
+	enemy1_hp.innerHTML = enemy1.hp
+	enemy2_hp.innerHTML = enemy2.hp
+
+	player_dmg.innerHTML = player.dmg
+	player1_dmg.innerHTML = player1.dmg
+	player2_dmg.innerHTML = player2.dmg
+	player_hp.innerHTML = player.hp
+	player1_hp.innerHTML = player1.hp
+	player2_hp.innerHTML = player2.hp
+
+	enemy_name.innerHTML = "враг" 
+	player_name.innerHTML = "игрок" 
+
+	let audio = new Audio();
+            audio.src = '1.mp3';
+            audio.autoplay = true;
+
+	let attack = function(){
+		alert( "раунд начался!")
+		enemy.hp = enemy.hp - player.dmg
+		enemy_hp.innerHTML = enemy.hp
+
+		enemy1.hp = enemy1.hp - player1.dmg
+		enemy1_hp.innerHTML = enemy1.hp
+
+		enemy2.hp = enemy2.hp - player2.dmg
+		enemy2_hp.innerHTML = enemy2.hp
+
+		player.hp = player.hp - enemy.dmg
+		player_hp.innerHTML = player.hp
+
+		player1.hp = player1.hp - enemy1.dmg
+		player1_hp.innerHTML = player1.hp
+
+		player2.hp = player2.hp - enemy2.dmg
+		player2_hp.innerHTML = player2.hp
+
+		if (enemy.hp + enemy1.hp + enemy2.hp < player.hp + player1.hp + player2.hp) {
+			enemy_img.style.opacity = 0
+			enemy1_img.style.opacity = 0
+			enemy2_img.style.opacity = 0
+			enemy_name.innerHTML = "Враг проиграл"
+			score = score + 1
+			score_elem.innerHTML = score
+			alert( "Враг проиграл")
+			mom.style.opacity = 0
+			btn.style.display = "block"
+		}
+		if (enemy.hp + enemy1.hp + enemy2.hp > player.hp + player1.hp + player2.hp) {
+			player_img.style.opacity = 0
+			player1_img.style.opacity = 0
+			player2_img.style.opacity = 0
+			player_name.innerHTML = "Игрок проиграл"
+			alert( "Игрок проиграл")
+			alert( "Ты проиграл!")
+			mom.style.opacity = 0
+		}
+		return
+	}
+
+
+	setTimeout(attack, 5000)
+</script>
+</body>
+</html>

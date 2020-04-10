@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+	<style type="text/css">
+		.enemy{
+			height: 300px;
+			width: 225px;
+			background-size: 100% 100%;		
+			transition: 1s;
+			position: relative;
+			margin-top: 425px;
+			
+		}
+		.mirrorY{ 
+			transform: scale(-1, 1); 
+		}
+		.player{
+			height: 300px;
+			width: 225px;
+			background-size: 100% 100%;
+			transition: 1s;
+			margin-top: 425px;
+			position: relative;
+		}
+		
+		.mstr{
+			height: 200px;
+			width: 150px;
+			left: 1000px;
+			top: 15px;
+			position: absolute;
+		}
+		.player_property{
+			position: absolute;
+			color: white;
+		}
+		
+	</style>
+</head>
+<body>
+
+	<div class="mom"  style="background-image: url('back/3.png'); background-size: 100% 100%">
+		<h1 class="enemy_name" style="position: absolute; left: 300px; top: 300px; color: white"></h1>
+		<h1 class="player_name" style="position: absolute; left: 1000px; top: 300px; color: white"></h1>
+		<h1 style="position: absolute; left: 600px; top: 50px; color: white">score: <span class="score">2</span></h1>
+		<img src="img/5.png" style="position: absolute; top: 25px; left: 800px; width: 175px">
+		<img src="img/12.png" class="mstr">
+		
+		<div class="row mx-auto">
+			<div class="enemy mirrorY" style="position: absolute; left: 300px">
+				<h2 class="enemy_hp player_property" style="left: 10%;">0</h2>
+				<h2 class="enemy_damage player_property" style="left: 82%;">0</h2>
+			</div>
+			
+			<div class="player" style="margin-left: 1000px">
+				<h2 class="player_hp player_property" style="left: 82%;">0</h2>
+				<h2 class="player_damage player_property" style="left: 10%;">0</h2>
+			</div>
+			
+		</div>
+	</div>
+	
+<script type="text/javascript">
+	let btn = document.querySelector( ".btn")
+
+	let score = 0
+	let score_elem = document.querySelector( ".score")
+
+	let point = 3
+	let point_elem = document.querySelector( ".point")
+
+	let mom = document.querySelector( ".mom")
+
+	let enemy_name = document.querySelector(".enemy_name")
+	let player_name = document.querySelector(".player_name")
+
+	let enemy_img = document.querySelector( ".enemy")
+	
+	let player_img = document.querySelector( ".player")
+	
+
+	let enemy_hp = document.querySelector( ".enemy_hp")
+	
+	let player_hp = document.querySelector( ".player_hp")
+	
+
+	let enemy_dmg = document.querySelector( ".enemy_damage")
+	
+	let player_dmg = document.querySelector( ".player_damage")
+	
+
+	let images = ["url(img3/1.png)","url(img3/2.png)","url(img3/3.png)","url(img3/4.png)","url(img3/5.png)","url(img3/6.png)","url(img3/7.png)", "url(img3/8.png)","url(img3/9.png)","url(img3/10.png)"]
+	let getRandomImg = function(){
+		let rand = Math.random() * 7
+		let round = Math.round(rand)
+		return round
+	}
+	
+	let getRandom = function(){
+		let rand = Math.random() * 100
+		let round = Math.round(rand)
+		return round
+	}
+	let enemy = {
+		dmg : getRandom(),
+		hp : getRandom(),
+		img : images[getRandomImg()]
+	}
+	
+	let player = {
+		dmg : getRandom(),
+		hp : getRandom(),
+		img : images[getRandomImg()]
+	}
+	
+	player_img.style.backgroundImage = player.img
+	
+	enemy_img.style.backgroundImage = enemy.img
+	
+	enemy_dmg.innerHTML = enemy.dmg
+	
+	enemy_hp.innerHTML = enemy.hp
+	
+
+	player_dmg.innerHTML = player.dmg
+	
+	player_hp.innerHTML = player.hp
+	
+
+	enemy_name.innerHTML = "враг" 
+	player_name.innerHTML = "игрок" 
+
+	let attack = function(){
+		alert( "раунд начался!")
+		enemy.hp = enemy.hp - player.dmg
+		enemy_hp.innerHTML = enemy.hp
+
+		player.hp = player.hp - enemy.dmg
+		player_hp.innerHTML = player.hp
+
+
+		if (enemy.hp < player.hp) {
+			enemy_img.style.opacity = 0
+			
+			enemy_name.innerHTML = "Враг проиграл"
+			score = score + 1
+			score_elem.innerHTML = score
+			alert( "Враг проиграл")
+			mom.style.opacity = 0
+			btn.style.display = "block"
+		}
+		if (enemy.hp > player.hp) {
+			player_img.style.opacity = 0
+			
+			player_name.innerHTML = "Игрок проиграл"
+			score = score - 1
+			alert( "Игрок проиграл")
+			alert( "Ты проиграл!")
+			mom.style.opacity = 0
+		}
+		return
+	}
+
+	setTimeout(attack, 5000)
+</script>
+</body>
+</html>
